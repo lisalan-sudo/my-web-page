@@ -1,1102 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Lisa Lan · Your Southwest China Journey Begins Here</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --ink:#1c1a16;
-  --ink2:#2e2b24;
-  --sand:#f7f2ea;
-  --sand2:#ede7d9;
-  --terracotta:#b85c38;
-  --terra-light:#e8b49a;
-  --terra-pale:#f5e8e0;
-  --jade:#2d6b55;
-  --jade-light:#4a9478;
-  --gold:#c9973a;
-  --muted:#7a7060;
-  --white:#fff;
-  --border:rgba(28,26,22,0.12);
-}
-html{scroll-behavior:smooth;}
-body{background:var(--sand);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.6;}
-::-webkit-scrollbar{width:3px;}
-::-webkit-scrollbar-thumb{background:var(--terracotta);}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语单词拼写挑战</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --bg-color: #f5f7fa;
+        }
 
-/* ─── NAV ─── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.2rem 3rem;
-  transition:background 0.4s,border-color 0.4s;
-}
-nav.scrolled{background:rgba(247,242,234,0.97);border-bottom:1px solid var(--border);}
-.nav-brand{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:1.2rem;color:var(--ink);text-decoration:none;letter-spacing:0.5px;
-}
-.nav-brand span{color:var(--terracotta);font-style:italic;}
-.nav-links{display:flex;gap:2rem;list-style:none;}
-.nav-links a{
-  font-size:0.78rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;
-  color:var(--muted);text-decoration:none;transition:color 0.2s;
-}
-.nav-links a:hover{color:var(--terracotta);}
-.nav-book{
-  font-size:0.72rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;
-  background:var(--terracotta);color:var(--white);
-  padding:9px 22px;text-decoration:none;border-radius:2px;
-  transition:background 0.2s;
-}
-.nav-book:hover{background:var(--ink);}
-.nav-mobile-btn{display:none;background:none;border:none;cursor:pointer;padding:4px;}
-.nav-mobile-btn span{display:block;width:22px;height:1.5px;background:var(--ink);margin:5px 0;transition:transform 0.3s;}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-/* ─── HERO ─── */
-.hero{
-  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
-  position:relative;overflow:hidden;
-}
-.hero-left{
-  display:flex;flex-direction:column;justify-content:center;
-  padding:8rem 4rem 4rem 3rem;
-  position:relative;z-index:2;
-}
-.hero-right{
-  position:relative;overflow:hidden;
-}
-.hero-right-img{
-  position:absolute;inset:0;
-  background:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1200&q=85') center/cover no-repeat;
-  /* ★ 换成您自己在贵州/苗寨拍摄的最美照片 */
-  transform:scale(1.03);
-  transition:transform 8s ease;
-}
-.hero-right-img.zoomed{transform:scale(1);}
-.hero-right::after{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:120px;
-  background:linear-gradient(to right,var(--sand),transparent);
-  z-index:1;
-}
-.hero-tag{
-  display:inline-flex;align-items:center;gap:8px;
-  font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;
-  color:var(--terracotta);margin-bottom:1.8rem;
-  opacity:0;animation:up 0.7s 0.2s forwards;
-}
-.hero-tag::before{content:'';width:30px;height:1px;background:var(--terracotta);}
-.hero h1{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:clamp(2.4rem,4.5vw,4rem);
-  font-weight:400;line-height:1.1;
-  color:var(--ink);margin-bottom:1.2rem;
-  opacity:0;animation:up 0.7s 0.4s forwards;
-}
-.hero h1 em{color:var(--terracotta);font-style:italic;}
-.hero-lead{
-  font-size:1rem;line-height:1.8;color:var(--muted);
-  max-width:440px;margin-bottom:2.5rem;
-  opacity:0;animation:up 0.7s 0.6s forwards;
-}
-.hero-lead strong{color:var(--ink);font-weight:500;}
-.hero-actions{
-  display:flex;gap:1rem;flex-wrap:wrap;
-  opacity:0;animation:up 0.7s 0.8s forwards;
-}
-.btn-fill{
-  font-size:0.78rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;
-  background:var(--terracotta);color:var(--white);
-  padding:13px 28px;text-decoration:none;border-radius:2px;
-  transition:background 0.2s,transform 0.15s;display:inline-block;
-}
-.btn-fill:hover{background:var(--ink);transform:translateY(-2px);}
-.btn-line{
-  font-size:0.78rem;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;
-  border-bottom:1px solid var(--ink);color:var(--ink);
-  padding:13px 4px;text-decoration:none;
-  transition:color 0.2s,border-color 0.2s;display:inline-block;
-}
-.btn-line:hover{color:var(--terracotta);border-color:var(--terracotta);}
-.hero-badge{
-  position:absolute;bottom:3rem;left:3rem;z-index:3;
-  background:var(--white);border:1px solid var(--border);
-  padding:1rem 1.3rem;border-radius:4px;
-  opacity:0;animation:up 0.7s 1s forwards;
-}
-.hero-badge-num{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:2rem;color:var(--terracotta);line-height:1;display:block;
-}
-.hero-badge-text{font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:3px;}
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
 
-/* ─── TRUST BAR ─── */
-.trust{
-  background:var(--ink);
-  display:flex;justify-content:center;flex-wrap:wrap;gap:0;
-  border-top:3px solid var(--terracotta);
-}
-.trust-item{
-  display:flex;align-items:center;gap:10px;
-  padding:1.1rem 2.5rem;border-right:1px solid rgba(255,255,255,0.08);
-  flex:1;min-width:200px;
-}
-.trust-item:last-child{border-right:none;}
-.trust-icon{font-size:1.1rem;}
-.trust-text{font-size:0.75rem;letter-spacing:1px;color:rgba(247,242,234,0.7);line-height:1.5;}
-.trust-text strong{color:var(--sand);display:block;font-weight:500;}
+        h1 { color: #333; font-size: 1.5rem; margin-bottom: 2rem; }
 
-/* ─── SECTION BASICS ─── */
-section{padding:5.5rem 3rem;}
-.section-label{
-  display:flex;align-items:center;gap:10px;
-  font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;
-  color:var(--terracotta);margin-bottom:1rem;
-}
-.section-label::after{content:'';flex:0 0 30px;height:1px;background:var(--terracotta);}
-.section-title{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:clamp(1.8rem,3vw,2.8rem);font-weight:400;
-  color:var(--ink);line-height:1.15;margin-bottom:1rem;
-}
-.section-title em{font-style:italic;color:var(--terracotta);}
-.section-body{font-size:0.9rem;line-height:1.9;color:var(--muted);max-width:560px;}
-.inner{max-width:1140px;margin:0 auto;}
+        #word-display {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
 
-/* ─── ABOUT ─── */
-.about{background:var(--white);}
-.about-grid{
-  display:grid;grid-template-columns:420px 1fr;
-  gap:5rem;align-items:center;
-}
-.about-photo-wrap{position:relative;}
-.about-photo{
-  width:100%;aspect-ratio:4/5;object-fit:cover;
-  background:var(--sand2);background-size:cover;background-position:center;
-  display:block;
-  background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80');
-  /* ★ 换成 Lisalan 的个人照片 */
-}
-.about-accent{
-  position:absolute;top:-18px;left:-18px;
-  width:100px;height:100px;
-  border:2px solid var(--terra-light);
-  border-radius:0;z-index:-1;
-}
-.about-tag{
-  position:absolute;bottom:2rem;right:-1.5rem;
-  background:var(--terracotta);color:var(--white);
-  padding:1rem 1.2rem;
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:0.85rem;line-height:1.5;
-  max-width:160px;
-}
-.about-tag em{display:block;font-size:1.4rem;font-style:normal;}
-.about-content{}
-.about-intro{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:1.2rem;font-style:italic;color:var(--ink);
-  line-height:1.6;border-left:3px solid var(--terracotta);
-  padding-left:1.3rem;margin:1.5rem 0;
-}
-.about-traits{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1.8rem 0;}
-.trait{
-  font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;
-  border:1px solid var(--border);padding:5px 12px;border-radius:2px;color:var(--muted);
-}
-.about-regions{
-  background:var(--terra-pale);border-radius:4px;
-  padding:1.2rem 1.5rem;margin-top:1.5rem;
-}
-.about-regions-title{
-  font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;
-  color:var(--terracotta);margin-bottom:0.8rem;font-weight:500;
-}
-.regions-list{display:flex;flex-wrap:wrap;gap:0.6rem;}
-.region-tag{
-  font-size:0.8rem;font-weight:400;color:var(--ink);
-  background:var(--white);border-radius:2px;
-  padding:4px 12px;border:1px solid var(--border);
-}
+        #meaning-display {
+            color: #666;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
 
-/* ─── SERVICES ─── */
-.services{background:var(--sand);}
-.services-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:1.5rem;margin-top:3rem;
-}
-.svc-card{
-  background:var(--white);border:1px solid var(--border);
-  border-radius:4px;padding:2rem 1.5rem;
-  position:relative;overflow:hidden;
-  transition:transform 0.2s,box-shadow 0.2s;
-}
-.svc-card::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;
-  height:3px;background:var(--terracotta);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform 0.3s;
-}
-.svc-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(28,26,22,0.08);}
-.svc-card:hover::after{transform:scaleX(1);}
-.svc-emoji{font-size:1.8rem;margin-bottom:1.2rem;display:block;}
-.svc-num{
-  position:absolute;top:1rem;right:1.2rem;
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:2.5rem;color:rgba(28,26,22,0.05);line-height:1;
-}
-.svc-name{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:1.15rem;color:var(--ink);margin-bottom:0.7rem;
-}
-.svc-desc{font-size:0.8rem;line-height:1.8;color:var(--muted);}
-.svc-from{
-  display:inline-block;margin-top:1.2rem;
-  font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;
-  color:var(--terracotta);font-weight:500;
-}
+        input {
+            width: 80%;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
 
-/* ─── DESTINATIONS ─── */
-.destinations{background:var(--ink2);}
-.destinations .section-title{color:var(--sand);}
-.destinations .section-body{color:rgba(247,242,234,0.6);}
-.dest-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:2px;margin-top:3rem;
-}
-.dest-card{
-  position:relative;overflow:hidden;cursor:pointer;
-  aspect-ratio:3/4;
-}
-.dest-card.wide{grid-column:span 1;}
-.dest-img{
-  position:absolute;inset:0;background-size:cover;background-position:center;
-  transition:transform 0.6s ease;
-}
-.dest-card:hover .dest-img{transform:scale(1.06);}
-.dest-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(28,26,22,0.9) 0%,rgba(28,26,22,0.1) 60%,transparent 100%);
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:1.5rem;transition:background 0.3s;
-}
-.dest-card:hover .dest-overlay{background:linear-gradient(to top,rgba(184,92,56,0.85) 0%,rgba(28,26,22,0.2) 60%,transparent 100%);}
-.dest-region{
-  font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;
-  color:var(--terra-light);margin-bottom:5px;
-}
-.dest-name{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:1.15rem;color:var(--white);margin-bottom:5px;
-}
-.dest-note{font-size:0.75rem;color:rgba(247,242,234,0.6);line-height:1.5;}
+        input:focus { border-color: var(--primary-color); }
 
-/* ─── EXPERIENCES / JOURNEY TYPES ─── */
-.journeys{background:var(--white);}
-.journey-list{display:flex;flex-direction:column;gap:0;margin-top:3rem;}
-.journey-row{
-  display:grid;grid-template-columns:60px 1fr 1fr;
-  align-items:center;gap:2rem;
-  padding:2rem 0;border-bottom:1px solid var(--border);
-  transition:background 0.2s;cursor:default;
-}
-.journey-row:last-child{border-bottom:none;}
-.journey-row:hover{background:var(--terra-pale);margin:0 -3rem;padding:2rem 3rem;}
-.journey-num{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:2.2rem;color:var(--terra-light);line-height:1;
-}
-.journey-title{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:1.15rem;color:var(--ink);margin-bottom:0.4rem;
-}
-.journey-desc{font-size:0.8rem;color:var(--muted);line-height:1.7;}
-.journey-meta{display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:flex-end;}
-.journey-tag{
-  font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;
-  padding:4px 10px;border-radius:2px;
-}
-.jtag-terra{background:var(--terra-pale);color:var(--terracotta);}
-.jtag-jade{background:#e8f3ee;color:var(--jade);}
-.jtag-ink{background:var(--sand2);color:var(--ink);}
+        .correct { border-color: var(--success-color) !important; background-color: #ebfaef; }
+        .wrong { border-color: var(--error-color) !important; background-color: #fdf2f2; animation: shake 0.5s; }
 
-/* ─── FESTIVALS ─── */
-.festivals{background:var(--sand);}
-.fest-intro{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:2.5rem;}
-.fest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
-.fest-card{
-  background:var(--white);border:1px solid var(--border);border-radius:4px;
-  padding:1.3rem;display:flex;gap:1rem;align-items:flex-start;
-  transition:border-color 0.2s,transform 0.2s;
-}
-.fest-card:hover{border-color:var(--terracotta);transform:translateY(-2px);}
-.fest-month{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:0.85rem;text-align:center;min-width:36px;
-  color:var(--terracotta);font-style:italic;line-height:1.2;
-}
-.fest-month span{display:block;font-family:'DM Sans',sans-serif;font-size:1.3rem;font-style:normal;font-weight:300;color:var(--ink);}
-.fest-info{}
-.fest-name{font-size:0.85rem;font-weight:500;color:var(--ink);margin-bottom:3px;}
-.fest-detail{font-size:0.75rem;color:var(--muted);line-height:1.6;}
-.fest-people{font-size:0.68rem;letter-spacing:1px;color:var(--terracotta);margin-top:4px;text-transform:uppercase;}
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
 
-/* ─── TESTIMONIALS ─── */
-.testimonials{background:var(--ink);}
-.testimonials .section-title{color:var(--sand);}
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;}
-.testi-card{
-  background:rgba(247,242,234,0.05);border:1px solid rgba(247,242,234,0.1);
-  border-radius:4px;padding:2rem;
-}
-.testi-stars{color:var(--gold);font-size:0.8rem;letter-spacing:3px;margin-bottom:1rem;}
-.testi-quote{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:1rem;font-style:italic;color:var(--sand);
-  line-height:1.7;margin-bottom:1.5rem;
-}
-.testi-quote::before{content:'\201C';color:var(--terracotta);}
-.testi-quote::after{content:'\201D';color:var(--terracotta);}
-.testi-author{font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
-.testi-country{color:var(--terra-light);margin-left:6px;}
-
-/* ─── FAQ ─── */
-.faq{background:var(--white);}
-.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:3rem;}
-.faq-item{background:var(--white);padding:1.8rem 2rem;cursor:pointer;}
-.faq-item:hover{background:var(--terra-pale);}
-.faq-q{
-  font-weight:500;font-size:0.88rem;color:var(--ink);
-  display:flex;justify-content:space-between;align-items:center;gap:1rem;
-}
-.faq-q::after{content:'+';color:var(--terracotta);font-size:1.2rem;font-weight:300;flex-shrink:0;}
-.faq-item.open .faq-q::after{content:'−';}
-.faq-a{
-  font-size:0.82rem;color:var(--muted);line-height:1.8;
-  max-height:0;overflow:hidden;transition:max-height 0.3s ease,margin-top 0.2s;
-}
-.faq-item.open .faq-a{max-height:200px;margin-top:0.8rem;}
-
-/* ─── CONTACT ─── */
-.contact{
-  background:var(--sand);
-}
-.contact-wrap{
-  display:grid;grid-template-columns:1fr 1.2fr;gap:5rem;
-  align-items:start;
-}
-.contact-info{}
-.contact-lisa{
-  display:flex;align-items:center;gap:1rem;
-  background:var(--white);border:1px solid var(--border);
-  border-radius:4px;padding:1.2rem;margin-bottom:1.8rem;
-}
-.lisa-avatar{
-  width:56px;height:56px;border-radius:50%;background:var(--terra-pale);
-  border:2px solid var(--terra-light);overflow:hidden;flex-shrink:0;
-  background-image:url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80');
-  background-size:cover;background-position:center;
-  /* ★ 换成 Lisalan 的头像照片 */
-}
-.lisa-name{font-family:'DM Serif Display',Georgia,serif;font-size:1.05rem;color:var(--ink);}
-.lisa-title{font-size:0.72rem;color:var(--muted);letter-spacing:1px;margin-top:2px;}
-.lisa-exp{
-  margin-top:3px;font-size:0.68rem;letter-spacing:1.5px;
-  text-transform:uppercase;color:var(--terracotta);font-weight:500;
-}
-.contact-details{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;}
-.cd-item{display:flex;gap:0.8rem;align-items:flex-start;}
-.cd-icon{color:var(--terracotta);font-size:0.9rem;margin-top:2px;width:20px;text-align:center;}
-.cd-text{font-size:0.82rem;line-height:1.7;color:var(--muted);}
-.cd-text strong{color:var(--ink);display:block;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;font-weight:500;margin-bottom:1px;}
-.social-row{display:flex;gap:0.6rem;flex-wrap:wrap;}
-.soc-btn{
-  font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;
-  border:1px solid var(--border);color:var(--muted);
-  padding:6px 12px;text-decoration:none;border-radius:2px;
-  transition:border-color 0.2s,color 0.2s,background 0.2s;
-}
-.soc-btn:hover{border-color:var(--terracotta);color:var(--terracotta);}
-.contact-form{background:var(--white);border:1px solid var(--border);border-radius:4px;overflow:hidden;}
-.form-row{border-bottom:1px solid var(--border);}
-.form-row:last-of-type{border-bottom:none;}
-.form-label{
-  display:block;font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;
-  color:var(--muted);padding:1rem 1.3rem 0;
-}
-.form-input{
-  width:100%;border:none;outline:none;background:transparent;
-  font-family:'DM Sans',sans-serif;font-size:0.88rem;font-weight:300;
-  color:var(--ink);padding:0.4rem 1.3rem 1rem;
-}
-.form-input::placeholder{color:rgba(122,112,96,0.5);}
-select.form-input option{background:#fff;}
-textarea.form-input{min-height:90px;resize:vertical;}
-.form-submit{
-  width:100%;background:var(--terracotta);color:var(--white);border:none;
-  font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:500;
-  letter-spacing:2.5px;text-transform:uppercase;
-  padding:1.2rem;cursor:pointer;transition:background 0.2s;
-}
-.form-submit:hover{background:var(--ink);}
-
-/* ─── FOOTER ─── */
-footer{
-  background:var(--ink2);
-  padding:2.5rem 3rem;
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
-  border-top:3px solid var(--terracotta);
-}
-.footer-brand{
-  font-family:'DM Serif Display',Georgia,serif;
-  font-size:1.1rem;color:var(--sand);letter-spacing:0.5px;
-}
-.footer-brand span{color:var(--terracotta);font-style:italic;}
-.footer-text{font-size:0.7rem;letter-spacing:1px;color:rgba(247,242,234,0.4);}
-.footer-links{display:flex;gap:1.5rem;}
-.footer-links a{font-size:0.7rem;letter-spacing:1px;color:rgba(247,242,234,0.4);text-decoration:none;transition:color 0.2s;}
-.footer-links a:hover{color:var(--terra-light);}
-
-/* ─── STICKY CTA ─── */
-.sticky-cta{
-  position:fixed;bottom:1.5rem;right:1.5rem;z-index:100;
-  background:var(--terracotta);color:var(--white);
-  font-size:0.72rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;
-  padding:12px 20px;text-decoration:none;border-radius:2px;
-  box-shadow:0 4px 20px rgba(184,92,56,0.4);
-  transition:background 0.2s,transform 0.2s;
-  opacity:0;transform:translateY(10px);transition:opacity 0.3s,transform 0.3s,background 0.2s;
-}
-.sticky-cta.show{opacity:1;transform:translateY(0);}
-.sticky-cta:hover{background:var(--ink);}
-
-/* ─── REVEAL ─── */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease;}
-.reveal.up{opacity:1;transform:translateY(0);}
-.reveal-delay-1{transition-delay:0.1s;}
-.reveal-delay-2{transition-delay:0.2s;}
-.reveal-delay-3{transition-delay:0.3s;}
-
-/* ─── ANIMATIONS ─── */
-@keyframes up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-
-/* ─── RESPONSIVE ─── */
-@media(max-width:900px){
-  nav{padding:1rem 1.5rem;}
-  .nav-links{display:none;}
-  .hero{grid-template-columns:1fr;min-height:auto;}
-  .hero-left{padding:7rem 1.5rem 3rem;}
-  .hero-right{height:55vw;min-height:280px;position:relative;}
-  .hero-right::after{display:none;}
-  section{padding:4rem 1.5rem;}
-  .about-grid{grid-template-columns:1fr;gap:2.5rem;}
-  .about-photo-wrap{max-width:360px;}
-  .services-grid{grid-template-columns:1fr 1fr;}
-  .dest-grid{grid-template-columns:1fr 1fr;}
-  .fest-grid{grid-template-columns:1fr 1fr;}
-  .testi-grid{grid-template-columns:1fr;}
-  .faq-grid{grid-template-columns:1fr;}
-  .contact-wrap{grid-template-columns:1fr;gap:2.5rem;}
-  .journey-row{grid-template-columns:40px 1fr;gap:1rem;}
-  .journey-meta{justify-content:flex-start;grid-column:2;}
-  footer{flex-direction:column;text-align:center;padding:2rem 1.5rem;}
-}
-@media(max-width:600px){
-  .services-grid{grid-template-columns:1fr;}
-  .dest-grid{grid-template-columns:1fr;}
-  .fest-grid{grid-template-columns:1fr;}
-  .trust-item{min-width:160px;}
-}
-</style>
+        .score-board { margin-top: 2rem; color: #888; font-size: 0.9rem; }
+    </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="main-nav">
-  <a class="nav-brand" href="#">Lisa<span>Lan</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About Lisa</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#destinations">Destinations</a></li>
-    <li><a href="#festivals">Festivals</a></li>
-    <li><a href="#faq">FAQ</a></li>
-  </ul>
-  <a class="nav-book" href="#contact">Plan My Trip</a>
-</nav>
+<div class="container">
+    <h1>单词拼写闯关</h1>
+    <div id="word-display">Loading...</div>
+    <div id="meaning-display">加载中...</div>
+    
+    <input type="text" id="user-input" placeholder="在这里输入单词..." autocomplete="off">
 
-<!-- HERO -->
-<div class="hero" id="home">
-  <div class="hero-left">
-    <p class="hero-tag">Southwest China Expert · 17 Years</p>
-    <h1>Your Journey into<br/><em>Real Southwest China</em><br/>Starts with Lisa</h1>
-    <p class="hero-lead">
-      Not a tour company. Not a stranger.<br/>
-      <strong>A trusted friend who happens to know every hidden trail, every Miao festival, every secret view in Guizhou — and beyond.</strong>
-    </p>
-    <div class="hero-actions">
-      <a class="btn-fill" href="#contact">Start Planning Together</a>
-      <a class="btn-line" href="#about">Meet Lisa →</a>
+    <div class="score-board">
+        已完成: <span id="score">0</span>
     </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-right-img" id="hero-img"></div>
-  </div>
-  <div class="hero-badge">
-    <span class="hero-badge-num">17</span>
-    <span class="hero-badge-text">Years of Guizhou<br/>Expertise</span>
-  </div>
 </div>
 
-<!-- TRUST BAR -->
-<div class="trust reveal">
-  <div class="trust-item">
-    <span class="trust-icon">🏔️</span>
-    <div class="trust-text"><strong>Guizhou Specialist</strong>17 years on the ground</div>
-  </div>
-  <div class="trust-item">
-    <span class="trust-icon">🌏</span>
-    <div class="trust-text"><strong>5 Provinces</strong>Guizhou · Yunnan · Guangxi · Sichuan · Hunan</div>
-  </div>
-  <div class="trust-item">
-    <span class="trust-icon">👥</span>
-    <div class="trust-text"><strong>Private & Small Groups</strong>No mass tourism, ever</div>
-  </div>
-  <div class="trust-item">
-    <span class="trust-icon">💬</span>
-    <div class="trust-text"><strong>Fluent English</strong>Always by your side</div>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="inner">
-    <div class="about-grid">
-      <div class="about-photo-wrap reveal">
-        <div class="about-photo"></div>
-        <div class="about-accent"></div>
-        <div class="about-tag">
-          <em>Lisa Lan</em>
-          Your Southwest China Expert
-        </div>
-      </div>
-      <div class="reveal reveal-delay-1">
-        <p class="section-label">About Lisa</p>
-        <h2 class="section-title">Not a Guide.<br/>A <em>Friend Who Knows</em><br/>Every Secret.</h2>
-        <p class="about-intro">
-          "I don't just take you to Guizhou. I open a door to a world most travellers never get to enter."
-        </p>
-        <p class="section-body">
-          My name is Lisa Lan, and I've spent 17 years immersed in the landscapes, 
-          peoples and rhythms of Southwest China. I grew up fascinated by the Miao and 
-          Dong minority cultures — their embroidery, their silver, their songs passed 
-          down through generations without a written word.
-        </p>
-        <p class="section-body" style="margin-top:1rem;">
-          What I offer isn't a packaged tour. It's a genuine connection — to the land, 
-          the people, and a way of travel that feels more like visiting a friend's homeland 
-          than ticking boxes off a list. Whether you want total luxury or a humble homestay 
-          in a Miao village, I make it extraordinary.
-        </p>
-        <div class="about-traits">
-          <span class="trait">Miao Culture</span>
-          <span class="trait">Dong Minority</span>
-          <span class="trait">Karst Landscapes</span>
-          <span class="trait">Festival Expert</span>
-          <span class="trait">Luxury Travel</span>
-          <span class="trait">Off-the-beaten-path</span>
-          <span class="trait">Boutique Stays</span>
-        </div>
-        <div class="about-regions">
-          <div class="about-regions-title">Coverage — Southwest China & Beyond</div>
-          <div class="regions-list">
-            <span class="region-tag">🏔️ Guizhou (Specialist)</span>
-            <span class="region-tag">☁️ Yunnan</span>
-            <span class="region-tag">🌿 Guangxi</span>
-            <span class="region-tag">🐼 Sichuan</span>
-            <span class="region-tag">🌊 Hunan</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="inner">
-    <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;">
-      <div>
-        <p class="section-label">What I Offer</p>
-        <h2 class="section-title">Bespoke Experiences,<br/><em>Warmly Delivered</em></h2>
-      </div>
-      <a class="btn-fill" href="#contact">Enquire Now</a>
-    </div>
-    <div class="services-grid">
-      <div class="svc-card reveal">
-        <span class="svc-num">01</span>
-        <span class="svc-emoji">🧭</span>
-        <h3 class="svc-name">Private Guided Tours</h3>
-        <p class="svc-desc">Just you (and your travel companions) with Lisa as your dedicated guide. I handle everything — transport, access, translation, surprises — so you can simply be present and enjoy every moment.</p>
-        <!-- ★ 换成您的真实价格 -->
-        <span class="svc-from">From ¥1,800 / day</span>
-      </div>
-      <div class="svc-card reveal reveal-delay-1">
-        <span class="svc-num">02</span>
-        <span class="svc-emoji">🏡</span>
-        <h3 class="svc-name">Curated Stays</h3>
-        <p class="svc-desc">From boutique design hotels in Guiyang to century-old wooden Miao guesthouses in Qiandongnan — I personally select and arrange every place you sleep, ensuring it adds to the story of your journey.</p>
-        <span class="svc-from">All levels available</span>
-      </div>
-      <div class="svc-card reveal reveal-delay-2">
-        <span class="svc-num">03</span>
-        <span class="svc-emoji">🗺️</span>
-        <h3 class="svc-name">Tailored Itineraries</h3>
-        <p class="svc-desc">You share your dream; I craft every detail. Cultural deep-dives, photography routes, multi-province Southwest journeys, festival timing — every plan is made fresh, just for you. No two Lisa trips are the same.</p>
-        <span class="svc-from">Fully custom</span>
-      </div>
-      <div class="svc-card reveal reveal-delay-3">
-        <span class="svc-num">04</span>
-        <span class="svc-emoji">🥾</span>
-        <h3 class="svc-name">Adventure & Trekking</h3>
-        <p class="svc-desc">Multi-day treks through karst valleys, river gorge hikes, off-trail exploration of Fanjing Mountain and the Leigong Nature Reserve. For those who want to disappear into wild Southwest China.</p>
-        <span class="svc-from">Small groups only</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DESTINATIONS -->
-<section class="destinations" id="destinations">
-  <div class="inner">
-    <div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;">
-      <div>
-        <p class="section-label" style="color:var(--terra-light);">Where We Go</p>
-        <h2 class="section-title">Guizhou & <em>The Southwest</em></h2>
-        <p class="section-body" style="margin-top:0.5rem;">My home territory — and the places I love most in the world.</p>
-      </div>
-    </div>
-    <div class="dest-grid reveal reveal-delay-1">
-      <div class="dest-card">
-        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80');"></div>
-        <!-- ★ 换成苗寨照片 -->
-        <div class="dest-overlay">
-          <span class="dest-region">Qiandongnan · Guizhou</span>
-          <h3 class="dest-name">Xijiang Miao Village</h3>
-          <p class="dest-note">World's largest Miao village — 1,200 wooden houses on a hillside</p>
-        </div>
-      </div>
-      <div class="dest-card">
-        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80');"></div>
-        <!-- ★ 换成黄果树瀑布照片 -->
-        <div class="dest-overlay">
-          <span class="dest-region">Anshun · Guizhou</span>
-          <h3 class="dest-name">Huangguoshu Falls</h3>
-          <p class="dest-note">Asia's largest waterfall — walk behind the 74-metre cascade</p>
-        </div>
-      </div>
-      <div class="dest-card">
-        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80');"></div>
-        <!-- ★ 换成梵净山照片 -->
-        <div class="dest-overlay">
-          <span class="dest-region">Tongren · Guizhou</span>
-          <h3 class="dest-name">Fanjing Mountain</h3>
-          <p class="dest-note">UNESCO sacred peak rising from sea of clouds</p>
-        </div>
-      </div>
-      <div class="dest-card">
-        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80');"></div>
-        <!-- ★ 换成荔波小七孔照片 -->
-        <div class="dest-overlay">
-          <span class="dest-region">Qiannan · Guizhou</span>
-          <h3 class="dest-name">Libo Xiaoqikong</h3>
-          <p class="dest-note">Emerald karst lakes and ancient forests — UNESCO World Heritage</p>
-        </div>
-      </div>
-      <div class="dest-card">
-        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=80');"></div>
-        <!-- ★ 换成云南/广西/四川照片 -->
-        <div class="dest-overlay">
-          <span class="dest-region">Yunnan · Guangxi · Sichuan</span>
-          <h3 class="dest-name">Beyond Guizhou</h3>
-          <p class="dest-note">Multi-province journeys across the full Southwest</p>
-        </div>
-      </div>
-      <div class="dest-card">
-        <div class="dest-img" style="background-image:url('https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80');background-position:top;"></div>
-        <!-- ★ 换成侗寨/鼓楼照片 -->
-        <div class="dest-overlay">
-          <span class="dest-region">Southeast Guizhou</span>
-          <h3 class="dest-name">Zhaoxing Dong Village</h3>
-          <p class="dest-note">Ancient drum towers and wind-rain bridges — Dong culture at its purest</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- JOURNEY TYPES -->
-<section class="journeys" id="journeys">
-  <div class="inner">
-    <div class="reveal">
-      <p class="section-label">Journey Styles</p>
-      <h2 class="section-title">Every Trip is <em>Yours</em> to Design</h2>
-      <p class="section-body">Tell me what moves you. I'll shape the rest.</p>
-    </div>
-    <div class="journey-list reveal reveal-delay-1">
-      <div class="journey-row">
-        <div class="journey-num">01</div>
-        <div>
-          <div class="journey-title">Ethnic Culture Immersion</div>
-          <div class="journey-desc">Deep access to Miao and Dong villages — festivals, silversmithing, embroidery, lusheng music, village ceremonies. The experiences that no guidebook can give you.</div>
-        </div>
-        <div class="journey-meta">
-          <span class="journey-tag jtag-terra">Miao · Dong</span>
-          <span class="journey-tag jtag-ink">3–10 Days</span>
-        </div>
-      </div>
-      <div class="journey-row">
-        <div class="journey-num">02</div>
-        <div>
-          <div class="journey-title">Natural Wonders & Karst Landscapes</div>
-          <div class="journey-desc">Waterfalls, limestone pillars, underground rivers, turquoise lakes. Guizhou has more karst scenery than anywhere on earth — I'll take you to the ones that steal your breath.</div>
-        </div>
-        <div class="journey-meta">
-          <span class="journey-tag jtag-jade">Nature</span>
-          <span class="journey-tag jtag-ink">4–8 Days</span>
-        </div>
-      </div>
-      <div class="journey-row">
-        <div class="journey-num">03</div>
-        <div>
-          <div class="journey-title">Festival Tours</div>
-          <div class="journey-desc">Guizhou has over 1,000 minority festivals a year. I know exactly when and where they happen — and can get you an inside seat, not just a tourist view from the crowd.</div>
-        </div>
-        <div class="journey-meta">
-          <span class="journey-tag jtag-terra">Seasonal</span>
-          <span class="journey-tag jtag-ink">2–5 Days</span>
-        </div>
-      </div>
-      <div class="journey-row">
-        <div class="journey-num">04</div>
-        <div>
-          <div class="journey-title">Southwest Grand Tour</div>
-          <div class="journey-desc">Combine Guizhou with Yunnan, Guangxi, Sichuan or Hunan into an epic multi-province journey. I handle the full route — my expertise spans all of Southwest China.</div>
-        </div>
-        <div class="journey-meta">
-          <span class="journey-tag jtag-jade">Multi-Province</span>
-          <span class="journey-tag jtag-ink">10–21 Days</span>
-        </div>
-      </div>
-      <div class="journey-row">
-        <div class="journey-num">05</div>
-        <div>
-          <div class="journey-title">Luxury & Comfort</div>
-          <div class="journey-desc">Boutique hotels, private vehicles, curated meals, exclusive access. High-end Southwest China travel with the warmth and insider knowledge of a local friend.</div>
-        </div>
-        <div class="journey-meta">
-          <span class="journey-tag jtag-terra">Premium</span>
-          <span class="journey-tag jtag-ink">Any Length</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FESTIVALS -->
-<section class="festivals" id="festivals">
-  <div class="inner">
-    <div class="fest-intro reveal">
-      <div>
-        <p class="section-label">Festival Calendar</p>
-        <h2 class="section-title">Over 1,000 Festivals.<br/>I Know <em>All of Them.</em></h2>
-      </div>
-      <p class="section-body">Time your visit right and Guizhou transforms into something unforgettable. Let me match your dates to the perfect celebration.</p>
-    </div>
-    <div class="fest-grid reveal reveal-delay-1">
-      <div class="fest-card">
-        <div class="fest-month">Feb<span>–Mar</span></div>
-        <div class="fest-info">
-          <div class="fest-name">Miao New Year (苗年)</div>
-          <div class="fest-detail">The grandest Miao celebration — lusheng dances, silver costumes, feasts lasting days. Different villages celebrate on different dates.</div>
-          <div class="fest-people">Miao · Qiandongnan</div>
-        </div>
-      </div>
-      <div class="fest-card">
-        <div class="fest-month">Apr<span>8</span></div>
-        <div class="fest-info">
-          <div class="fest-name">April Eighth Festival (四月八)</div>
-          <div class="fest-detail">Miao folk festival with traditional games, singing, and colourful costume displays in Guiyang and surrounding villages.</div>
-          <div class="fest-people">Miao · Guiyang region</div>
-        </div>
-      </div>
-      <div class="fest-card">
-        <div class="fest-month">May<span>–Jun</span></div>
-        <div class="fest-info">
-          <div class="fest-name">Lusheng Festival (芦笙节)</div>
-          <div class="fest-detail">Traditional reed-pipe music and dance competitions. One of the most visually spectacular festivals in all of Guizhou.</div>
-          <div class="fest-people">Miao · Dong · Multiple regions</div>
-        </div>
-      </div>
-      <div class="fest-card">
-        <div class="fest-month">Jul<span>–Aug</span></div>
-        <div class="fest-info">
-          <div class="fest-name">Torch Festival (火把节)</div>
-          <div class="fest-detail">Spectacular night festival with thousands of torches carried through villages. Unforgettable photography opportunities.</div>
-          <div class="fest-people">Yi · Western Guizhou</div>
-        </div>
-      </div>
-      <div class="fest-card">
-        <div class="fest-month">Sep<span>–Oct</span></div>
-        <div class="fest-info">
-          <div class="fest-name">Dong Singing Festival (侗族大歌节)</div>
-          <div class="fest-detail">UNESCO Intangible Heritage polyphonic choral singing — hauntingly beautiful, deeply moving. Zhaoxing is the best place to experience it.</div>
-          <div class="fest-people">Dong · Zhaoxing & Rongjiang</div>
-        </div>
-      </div>
-      <div class="fest-card">
-        <div class="fest-month">Nov<span>–Dec</span></div>
-        <div class="fest-info">
-          <div class="fest-name">Winter Village Markets</div>
-          <div class="fest-detail">The quiet season brings authentic weekly ethnic markets alive with traders in full traditional dress. Fewer tourists, more real life.</div>
-          <div class="fest-people">Multiple ethnic groups</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials" id="reviews">
-  <div class="inner">
-    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 0;">
-      <p class="section-label" style="justify-content:center;color:var(--terra-light);">Guest Stories</p>
-      <h2 class="section-title">What Travellers <em>Say About Lisa</em></h2>
-    </div>
-    <div class="testi-grid reveal reveal-delay-1">
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <!-- ★ 换成您的真实顾客好评 -->
-        <p class="testi-quote">Lisa didn't just show us Guizhou — she introduced us to her world. We were invited into a Miao elder's home for a meal that none of us will ever forget. This is not tourism. It's something else entirely.</p>
-        <div class="testi-author">Thomas & Anna R.<span class="testi-country">· Germany</span></div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">I've travelled to 40 countries and hired guides in most of them. Lisa is in a category of her own. Her warmth, her knowledge, her ability to open doors — it was extraordinary. We already have our second trip planned.</p>
-        <div class="testi-author">Sarah M.<span class="testi-country">· United Kingdom</span></div>
-      </div>
-      <div class="testi-card">
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">What struck me most was that Lisa genuinely cared — about our experience, about the communities we visited, about making sure every day felt meaningful. The Dong singing we heard in Zhaoxing brought tears to my eyes.</p>
-        <div class="testi-author">Marc D.<span class="testi-country">· France</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="faq" id="faq">
-  <div class="inner">
-    <div class="reveal">
-      <p class="section-label">Common Questions</p>
-      <h2 class="section-title">Everything You Need<br/>to <em>Know Before You Go</em></h2>
-    </div>
-    <div class="faq-grid reveal reveal-delay-1">
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">Do I need a Chinese visa to visit Guizhou?</div>
-        <div class="faq-a">Citizens of 54+ countries can now enter China visa-free for up to 30 days (as of 2024). I can advise you on the current requirements for your specific country and help you plan your entry point. Guiyang has an international airport with connections via major Asian hubs.</div>
-      </div>
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">What is the best time of year to visit Guizhou?</div>
-        <div class="faq-a">Spring (April–May) and autumn (September–October) offer the best weather and landscape. However, the real answer depends on what you want to see — I can match your dates to the perfect festival or seasonal experience. Winter is underrated for authentic village life.</div>
-      </div>
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">Do you cater for solo travellers and couples as well as groups?</div>
-        <div class="faq-a">Absolutely. Most of my most memorable trips have been with solo travellers or couples who wanted a deeply personal experience. I design every journey from scratch regardless of group size — from 1 person to small groups of up to 8.</div>
-      </div>
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">Is Guizhou safe for international travellers?</div>
-        <div class="faq-a">Guizhou is one of the safest provinces in China for international visitors. The local people are famously warm and welcoming. Having a local guide like me means you also have someone who knows every area intimately and can ensure you're comfortable at every step.</div>
-      </div>
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">Can you arrange the full trip including flights and accommodation?</div>
-        <div class="faq-a">Yes. I offer full trip planning including domestic flights, high-speed rail, private transfers, accommodation at all levels (from boutique hotels to authentic homestays), daily guiding, and restaurant reservations. You can arrive with nothing planned — I handle everything.</div>
-      </div>
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">Can we combine Guizhou with other provinces?</div>
-        <div class="faq-a">This is one of my specialities. I cover all of Southwest China — Guizhou, Yunnan, Guangxi, Sichuan and Hunan. A 10–21 day Southwest Grand Tour combining multiple provinces is one of the most rewarding journeys I offer. Just tell me what calls to you.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="inner">
-    <div style="text-align:center;margin-bottom:3rem;" class="reveal">
-      <p class="section-label" style="justify-content:center;">Let's Talk</p>
-      <h2 class="section-title">Your Southwest China<br/>Story Starts <em>Here</em></h2>
-      <p class="section-body" style="margin:0.8rem auto 0;text-align:center;">
-        Send me a message — no matter how vague or detailed your idea. I reply personally to every enquiry, usually within 24 hours.
-      </p>
-    </div>
-    <div class="contact-wrap">
-      <div class="reveal">
-        <div class="contact-lisa">
-          <div class="lisa-avatar"></div>
-          <div>
-            <div class="lisa-name">Lisa Lan</div>
-            <div class="lisa-title">Southwest China Travel Expert</div>
-            <div class="lisa-exp">17 years · 5 provinces</div>
-          </div>
-        </div>
-        <div class="contact-details">
-          <div class="cd-item">
-            <span class="cd-icon">✉</span>
-            <div class="cd-text">
-              <!-- ★ 换成您的邮箱 -->
-              <strong>Email</strong>
-              your@email.com
-            </div>
-          </div>
-          <div class="cd-item">
-            <span class="cd-icon">💬</span>
-            <div class="cd-text">
-              <!-- ★ 换成您的微信号 -->
-              <strong>WeChat</strong>
-              YourWeChatID
-            </div>
-          </div>
-          <div class="cd-item">
-            <span class="cd-icon">📍</span>
-            <div class="cd-text">
-              <!-- ★ 换成您的城市 -->
-              <strong>Based In</strong>
-              Guiyang / Kaili, Guizhou, China
-            </div>
-          </div>
-          <div class="cd-item">
-            <span class="cd-icon">⏱</span>
-            <div class="cd-text">
-              <strong>Response Time</strong>
-              Within 24 hours · Always personal
-            </div>
-          </div>
-          <div class="cd-item">
-            <span class="cd-icon">🌐</span>
-            <div class="cd-text">
-              <strong>Languages</strong>
-              English · 中文普通话
-            </div>
-          </div>
-        </div>
-        <div class="social-row">
-          <!-- ★ 换成您的真实链接 -->
-          <a class="soc-btn" href="#" target="_blank">Instagram</a>
-          <a class="soc-btn" href="#" target="_blank">Facebook</a>
-          <a class="soc-btn" href="#" target="_blank">TripAdvisor</a>
-          <a class="soc-btn" href="#" target="_blank">YouTube</a>
-          <a class="soc-btn" href="#" target="_blank">WhatsApp</a>
-        </div>
-      </div>
-      <div class="reveal reveal-delay-1">
-        <div class="contact-form">
-          <div class="form-row">
-            <label class="form-label">Your Name</label>
-            <input class="form-input" type="text" placeholder="e.g. Sophie Martin" id="f-name"/>
-          </div>
-          <div class="form-row">
-            <label class="form-label">Email Address</label>
-            <input class="form-input" type="email" placeholder="your@email.com" id="f-email"/>
-          </div>
-          <div class="form-row">
-            <label class="form-label">Country / Where Are You From?</label>
-            <input class="form-input" type="text" placeholder="e.g. Paris, France" id="f-country"/>
-          </div>
-          <div class="form-row">
-            <label class="form-label">I'm Interested In...</label>
-            <select class="form-input" id="f-service">
-              <option value="">Select a journey type</option>
-              <option>Private Guided Tour — Guizhou</option>
-              <option>Ethnic Culture & Festival Tour</option>
-              <option>Southwest Grand Tour (Multi-Province)</option>
-              <option>Luxury / Boutique Experience</option>
-              <option>Trekking & Outdoor Adventure</option>
-              <option>Custom Itinerary Design</option>
-              <option>Not sure yet — I'd love advice</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label class="form-label">Approx. Travel Dates & Group Size</label>
-            <input class="form-input" type="text" placeholder="e.g. October 2025, 2 people" id="f-dates"/>
-          </div>
-          <div class="form-row">
-            <label class="form-label">Tell Me About Your Dream Trip</label>
-            <textarea class="form-input" id="f-msg" placeholder="What excites you most? Any special interests, pace, budget level? The more you share, the better I can help."></textarea>
-          </div>
-          <button class="form-submit" onclick="submitForm()">Send to Lisa →</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">Lisa<span>Lan</span> · Southwest China</div>
-  <div class="footer-links">
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#destinations">Destinations</a>
-    <a href="#festivals">Festivals</a>
-    <a href="#faq">FAQ</a>
-    <a href="#contact">Contact</a>
-  </div>
-  <div class="footer-text">© 2025 Lisa Lan · Bespoke Southwest China Travel · All Rights Reserved</div>
-</footer>
-
-<!-- STICKY CTA -->
-<a class="sticky-cta" href="#contact" id="sticky">Plan My Trip</a>
+<audio id="success-sound" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
 
 <script>
-// Nav scroll
-window.addEventListener('scroll',()=>{
-  const nav=document.getElementById('main-nav');
-  const sticky=document.getElementById('sticky');
-  nav.classList.toggle('scrolled',window.scrollY>60);
-  sticky.classList.toggle('show',window.scrollY>400);
-});
+    // 在这里添加你的单词库
+    const wordList = [
+        { word: 'apple', meaning: '苹果' },
+        { word: 'banana', meaning: '香蕉' },
+        { word: 'computer', meaning: '计算机' },
+        { word: 'english', meaning: '英语' },
+        { word: 'journey', meaning: '旅程' },
+        { word: 'success', meaning: '成功' },
+        { word: 'matcha', meaning: '抹茶' }
+    ];
 
-// Hero image zoom
-setTimeout(()=>document.getElementById('hero-img').classList.add('zoomed'),100);
+    let currentWordObj = {};
+    let score = 0;
 
-// Reveal on scroll
-const revealEls=document.querySelectorAll('.reveal');
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('up');});
-},{threshold:0.1});
-revealEls.forEach(el=>obs.observe(el));
+    const wordDisplay = document.getElementById('word-display');
+    const meaningDisplay = document.getElementById('meaning-display');
+    const userInput = document.getElementById('user-input');
+    const scoreDisplay = document.getElementById('score');
+    const successSound = document.getElementById('success-sound');
 
-// FAQ
-function toggleFaq(el){
-  const isOpen=el.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-  if(!isOpen)el.classList.add('open');
-}
+    function nextWord() {
+        userInput.value = '';
+        userInput.classList.remove('correct', 'wrong');
+        const randomIndex = Math.floor(Math.random() * wordList.length);
+        currentWordObj = wordList[randomIndex];
+        wordDisplay.textContent = currentWordObj.word;
+        meaningDisplay.textContent = currentWordObj.meaning;
+    }
 
-// Form submit
-function submitForm(){
-  const name=document.getElementById('f-name').value.trim();
-  if(!name){alert('Please enter your name.');return;}
-  const btn=document.querySelector('.form-submit');
-  btn.textContent='✓ Message sent! Lisa will reply within 24 hours.';
-  btn.style.background='var(--jade)';
-  btn.disabled=true;
-  // ★ 连接到 Formspree 等邮件服务：
-  // 把 <button> 放在 <form action="https://formspree.io/f/YOUR_ID" method="POST"> 里即可
-}
+    userInput.addEventListener('input', () => {
+        const value = userInput.value.toLowerCase().trim();
+        const target = currentWordObj.word.toLowerCase();
+
+        if (value === target) {
+            // 输入正确
+            userInput.classList.add('correct');
+            userInput.classList.remove('wrong');
+            successSound.play();
+            score++;
+            scoreDisplay.textContent = score;
+            
+            // 1秒后自动切换下一个单词
+            setTimeout(nextWord, 1000);
+        } else if (value.length > 0 && !target.startsWith(value)) {
+            // 输入错误
+            userInput.classList.add('wrong');
+        } else {
+            // 正在输入或删除了错误部分
+            userInput.classList.remove('wrong', 'correct');
+        }
+    });
+
+    // 初始化第一个单词
+    nextWord();
 </script>
+
 </body>
 </html>
