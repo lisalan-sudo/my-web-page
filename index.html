@@ -174,12 +174,15 @@ section{padding:5.5rem 3rem;}
 }
 .about-photo-wrap{position:relative;}
 .about-photo {
-  /* ...其他代码保持不变... */
-  background-image: url('qingyan-stroll.jpg'); 
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  background: var(--sand2);
+  background-size: cover;
+  background-position: center;
+  display: block;
+  background-image: url('qingyan-stroll.jpg');
 }
-.about-accent{
-  position:absolute;top:-18px;left:-18px;
-  width:100px;height:100px;
   border:2px solid var(--terra-light);
   border-radius:0;z-index:-1;
 }
